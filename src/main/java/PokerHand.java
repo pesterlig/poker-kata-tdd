@@ -10,6 +10,9 @@ import java.util.List;
 
 public class PokerHand {
     private String handName;
+
+    private boolean isFlush;
+
     private ArrayList<Card> cards;
 
     public PokerHand(String handName, String[] cardCodes) {
@@ -18,15 +21,25 @@ public class PokerHand {
         Arrays.asList(cardCodes).forEach(cardCode -> cards.add(Card.findByCode(cardCode)));
     }
 
-    public boolean checkForFlush(){
-        boolean isFlush = false;
-        for(int i = 0; i<4; i++){
-            if ( ( getCards().get(i).getSuit() ).equals ( getCards().get(i+1).getSuit() ) ) {
-                isFlush = true;
+    public boolean checkForFlush() {
+        //boolean isFlush = false;
+        for (int i = 0; i < 4; i++) {
+            if ((getCards().get(i).getSuit()).equals(getCards().get(i + 1).getSuit())) {
+                setFlush(true);
             }
         }
+
         return isFlush;
     }
+
+    public boolean isFlush() {
+        return isFlush;
+    }
+
+    public void setFlush(boolean flush) {
+        isFlush = flush;
+    }
+
 
     public String getHandName() {
         return handName;
