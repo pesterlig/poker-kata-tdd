@@ -53,7 +53,8 @@ public class PokerHandTest {
         String[] whiteHand = new String[]{"4C", "3H", "2S", "8C", "AH"};
         game = new Game(1, "BlackFlush", blackFlush, "White", whiteHand);
         pokerHand = new PokerHand(game.getBlackName(), game.getBlackCardCodes());
-        assertTrue((pokerHand.checkForFlush() == true));
+        pokerHand.checkForFlush();
+        assertEquals("A Flush hand sets pokerHandType to FLUSH", "FLUSH", pokerHand.getPokerHandType());
     }
 
     @Test
@@ -62,27 +63,19 @@ public class PokerHandTest {
         String[] whiteHand = new String[]{"4C", "3H", "2S", "8C", "AH"};
         game = new Game(1, "BlackFlush", blackFlush, "White", whiteHand);
         pokerHand = new PokerHand(game.getWhiteName(), game.getWhiteCardCodes());
-        assertTrue((pokerHand.checkForFlush() == false));
+        pokerHand.checkForFlush();
+        assertEquals("A non-Flush hand does not set pokerHandType to FLUSH", "Undetermined", pokerHand.getPokerHandType());
     }
 
-    /*@Test
-    public void testCheckForFlushWithNoFlush() {
-        String[] blackFlush = new String[]{"2H", "9H", "5H", "3H", "KH"};
-        String[] whiteHand = new String[]{"4C", "3H", "2S", "8C", "AH"};
-        game = new Game(1, "BlackFlush", blackFlush, "White", whiteHand);
-        pokerHand = new PokerHand(game.getWhiteName(), game.getWhiteCardCodes());
-        assertTrue((pokerHand.checkForFlush() == false));
-    }*/
-
-    /*@Test
+    @Test
     public void testCheckForStraightWithStraightFlush() {
         String[] blackStraightFlush = new String[]{"2H", "3H", "4H", "5H", "6H"};
         String[] whiteHand = new String[]{"4C", "3D", "2S", "8C", "AH"};
-        game = new Game(1, "BlackFlush", blackStraightFlush, "White", whiteHand);
-        pokerHand = new PokerHand(game.getWhiteName(), game.getWhiteCardCodes());
-        assertTrue((pokerHand.checkForStraight() == true));
-
-
-    }*/
+        game = new Game(1, "BlackStraightFlush", blackStraightFlush, "White", whiteHand);
+        pokerHand = new PokerHand(game.getBlackName(), game.getBlackCardCodes());
+        pokerHand.checkForFlush();
+        pokerHand.checkForStraight();
+        assertEquals("A Straight Flush hand sets pokerHandType to STRAIGHT_FLUSH", "STRAIGHT_FLUSH", pokerHand.getPokerHandType());
+    }
 
 }
