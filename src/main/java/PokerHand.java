@@ -18,6 +18,16 @@ public class PokerHand {
         Arrays.asList(cardCodes).forEach(cardCode -> cards.add(Card.findByCode(cardCode)));
     }
 
+    public boolean checkForFlush(){
+        boolean isFlush = false;
+        for(int i = 0; i<4; i++){
+            if ( ( getCards().get(i).getSuit() ).equals ( getCards().get(i+1).getSuit() ) ) {
+                isFlush = true;
+            }
+        }
+        return isFlush;
+    }
+
     public String getHandName() {
         return handName;
     }
