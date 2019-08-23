@@ -48,6 +48,17 @@ public class PokerHandTest {
     }
 
     @Test
+    public void testSortHandAscending(){
+        String[] blackHand = new String[]{"2H", "9D", "5S", "3C", "KD"};
+        String[] whiteHand = new String[]{"AC", "3H", "2S", "8C", "4H"};
+        game = new Game(1, "Black", blackHand, "White", whiteHand);
+        pokerHand = new PokerHand(game.getWhiteName(), game.getWhiteCardCodes());
+        pokerHand = new PokerHand(game.getBlackName(), game.getBlackCardCodes());
+
+
+    }
+
+    @Test
     public void testCheckForFlushWithFlush() {
         String[] blackFlush = new String[]{"2H", "9H", "5H", "3H", "KH"};
         String[] whiteHand = new String[]{"4C", "3H", "2S", "8C", "AH"};
@@ -78,4 +89,17 @@ public class PokerHandTest {
         assertEquals("A Straight Flush hand sets pokerHandType to STRAIGHT_FLUSH", "STRAIGHT_FLUSH", pokerHand.getPokerHandType());
     }
 
-}
+    @Test
+    public void testFindValueOfHighestRankDuplicates() {
+        String[] blackFullHouse = new String[]{"6D", "5C", "5D", "5H", "6H"};
+        String[] whiteHand = new String[]{"4C", "3D", "2S", "8C", "AH"};
+        game = new Game(1, "BlackThreeOfAKind", blackFullHouse, "White", whiteHand);
+        pokerHand = new PokerHand(game.getBlackName(), game.getBlackCardCodes());
+        //pokerHand.checkForFlush();
+        //pokerHand.checkForStraight();
+        //want to create a hashmap that contains the rank of the duplicates as the key, and the count of duplicates as the value
+
+        assertEquals("Passed a pair of sixes and three fives, the value of the duplicates of Highest Rank is 6.", 6, pokerHand.findValueOfHighestRankDuplicates());
+    }
+
+  }
